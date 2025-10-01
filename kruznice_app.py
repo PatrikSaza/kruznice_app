@@ -45,18 +45,17 @@ if st.sidebar.button("Uložit do PDF"):
     pdf = FPDF()
     pdf.add_page()
 
-    # použití vestavěného UTF-8 fontu
-    pdf.add_font("DejaVu", "", "", uni=True)  # fpdf2 umožňuje vestavěný font
-    pdf.set_font("DejaVu", size=12)
+# použij vestavěný font Helvetica
+pdf.set_font("Helvetica", size=12)
 
-    # obsah PDF
-    pdf.cell(0, 10, "Bodový graf", ln=True)
-    pdf.cell(0, 10, f"Autor: Patrik Sázavský", ln=True)
-    pdf.cell(0, 10, f"Email: 278339@vutbr.cz", ln=True)
-    pdf.cell(0, 10, f"Střed: ({x0}, {y0})", ln=True)
-    pdf.cell(0, 10, f"Poloměr: {r} m", ln=True)
-    pdf.cell(0, 10, f"Počet bodů: {n}", ln=True)
-    pdf.cell(0, 10, f"Barva: {barva}", ln=True)
+# obsah PDF (diakritika nebude fungovat)
+pdf.cell(0, 10, "Bodovy graf", ln=True)
+pdf.cell(0, 10, f"Autor: Patrik Sazavsky", ln=True)  # bez diakritiky
+pdf.cell(0, 10, f"Email: 278339@vutbr.cz", ln=True)
+pdf.cell(0, 10, f"Stred: ({x0}, {y0})", ln=True)
+pdf.cell(0, 10, f"Polomer: {r} m", ln=True)
+pdf.cell(0, 10, f"Pocet bodu: {n}", ln=True)
+pdf.cell(0, 10, f"Barva: {barva}", ln=True)
 
     # uložení PDF do dočasného souboru
     tmp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
