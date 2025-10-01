@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # ---- Nadpis aplikace ----
-st.title("Body na kružnici")
+st.title("Moje školní aplikace: body na kružnici")
 
 # ---- Vstupy od uživatele ----
 x0 = st.number_input("Souřadnice středu X:", value=0.0)
