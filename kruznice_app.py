@@ -45,19 +45,24 @@ if st.sidebar.button("Uložit do PDF"):
     pdf = FPDF()
     pdf.add_page()
 
-# použij vestavěný font Helvetica
-pdf.set_font("Helvetica", size=12)
+st.sidebar.title("Export do PDF")
+if st.sidebar.button("Uložit do PDF"):
+    pdf = FPDF()
+    pdf.add_page()
 
-# obsah PDF (diakritika nebude fungovat)
-pdf.cell(0, 10, "Bodovy graf", ln=True)
-pdf.cell(0, 10, f"Autor: Patrik Sazavsky", ln=True)  # bez diakritiky
-pdf.cell(0, 10, f"Email: 278339@vutbr.cz", ln=True)
-pdf.cell(0, 10, f"Stred: ({x0}, {y0})", ln=True)
-pdf.cell(0, 10, f"Polomer: {r} m", ln=True)
-pdf.cell(0, 10, f"Pocet bodu: {n}", ln=True)
-pdf.cell(0, 10, f"Barva: {barva}", ln=True)
+    # použij vestavěný font Helvetica
+    pdf.set_font("Helvetica", size=12)
 
-    # uložení PDF do dočasného souboru
+    # obsah PDF
+    pdf.cell(0, 10, "Bodovy graf", ln=True)
+    pdf.cell(0, 10, f"Autor: Patrik Sazavsky", ln=True)
+    pdf.cell(0, 10, f"Email: 278339@vutbr.cz", ln=True)
+    pdf.cell(0, 10, f"Stred: ({x0}, {y0})", ln=True)
+    pdf.cell(0, 10, f"Polomer: {r} m", ln=True)
+    pdf.cell(0, 10, f"Pocet bodu: {n}", ln=True)
+    pdf.cell(0, 10, f"Barva: {barva}", ln=True)
+
+    # uložení do dočasného souboru
     tmp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
     pdf.output(tmp_pdf.name)
 
