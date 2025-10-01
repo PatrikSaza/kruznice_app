@@ -39,7 +39,7 @@ ax.set_ylabel("y (m)")
 st.pyplot(fig)
 
 # ---- Informace o autorovi ----
-st.sidebar.title("O aplikaci")
-st.sidebar.write("Autor: Jan Novák")   # změň na své jméno
-st.sidebar.write("Kontakt: jan.novak@email.cz")
+st.sidebar.title("Bodový graf")
+st.sidebar.write("Autor: Patrik Sázavský")   # změň na své jméno
+st.sidebar.write("Kontakt: 278339@vutbr.cz")
 st.sidebar.write("Použité technologie: Python, Streamlit, Matplotlib")
