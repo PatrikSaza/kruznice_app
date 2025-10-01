@@ -47,39 +47,31 @@ st.sidebar.write("Kontakt: 278339@vutbr.cz")
 st.sidebar.write("Použité technologie: Python, Streamlit, Matplotlib")
 
 # ---- Export do PDF ----
-if st.button("Export do PDF"):
-    # uložíme graf do dočasného obrázku
-    tmp_img = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-    fig.savefig(tmp_img.name)
+from fpdf import FPDF
+import tempfile
 
-    # vytvoření PDF
+st.sidebar.title("Export")
+if st.sidebar.button("Uložit do PDF"):
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
 
-    pdf.cell(200, 10, "Bodový graf", ln=True, align="C")
-    pdf.ln(10)
+    # font podporující UTF-8
+    pdf.add_font("DejaVu", "", "DejaVuSans.ttf", uni=True)
+    pdf.set_font("DejaVu", size=12)
 
-    pdf.cell(200, 10, f"Autor: Patrik Sázavský", ln=True)
-    pdf.cell(200, 10, f"Email: 278339@vutbr.cz", ln=True)
-    pdf.ln(10)
+    # obsah PDF
+    pdf.cell(0, 10, "Bodový graf", ln=True)
+    pdf.cell(0, 10, f"Autor: Patrik Sázavský", ln=True)
+    pdf.cell(0, 10, f"Email: 278339@vutbr.cz", ln=True)
+    pdf.cell(0, 10, f"Střed: ({x0}, {y0})", ln=True)
+    pdf.cell(0, 10, f"Poloměr: {r} m", ln=True)
+    pdf.cell(0, 10, f"Počet bodů: {n}", ln=True)
+    pdf.cell(0, 10, f"Barva: {barva}", ln=True)
 
-    pdf.cell(200, 10, f"Střed: ({x0}, {y0})", ln=True)
-    pdf.cell(200, 10, f"Poloměr: {r} m", ln=True)
-    pdf.cell(200, 10, f"Počet bodů: {n}", ln=True)
-    pdf.cell(200, 10, f"Barva bodů: {barva}", ln=True)
-    pdf.ln(10)
-
-    pdf.image(tmp_img.name, x=10, y=None, w=180)
-
-    # uložíme PDF do dočasného souboru
+    # uložení do dočasného souboru
     tmp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
     pdf.output(tmp_pdf.name)
 
-    # nabídneme ke stažení
+    # nabídka ke stažení
     with open(tmp_pdf.name, "rb") as f:
         st.download_button("Stáhnout PDF", f, file_name="bodovy_graf.pdf")
-
-    # úklid
-    os.unlink(tmp_img.name)
-    os.unlink(tmp_pdf.name)
