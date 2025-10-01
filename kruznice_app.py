@@ -40,17 +40,11 @@ st.sidebar.write("Použité technologie: Python, Streamlit, Matplotlib")
 
 # ---- Export do PDF ----
 st.sidebar.title("Export do PDF")
-if st.sidebar.button("Uložit do PDF"):
-
+if st.sidebar.button("Uložit do PDF", key="export_pdf"):
     pdf = FPDF()
     pdf.add_page()
 
-st.sidebar.title("Export do PDF")
-if st.sidebar.button("Uložit do PDF"):
-    pdf = FPDF()
-    pdf.add_page()
-
-    # použij vestavěný font Helvetica
+    # vestavěný font
     pdf.set_font("Helvetica", size=12)
 
     # obsah PDF
@@ -62,10 +56,8 @@ if st.sidebar.button("Uložit do PDF"):
     pdf.cell(0, 10, f"Pocet bodu: {n}", ln=True)
     pdf.cell(0, 10, f"Barva: {barva}", ln=True)
 
-    # uložení do dočasného souboru
     tmp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
     pdf.output(tmp_pdf.name)
 
-    # nabídka ke stažení
     with open(tmp_pdf.name, "rb") as f:
         st.download_button("Stáhnout PDF", f, file_name="bodovy_graf.pdf")
