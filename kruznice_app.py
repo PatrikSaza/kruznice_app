@@ -1,6 +1,8 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import tempfile
+from fpdf import FPDF
 
 # ---- Nadpis aplikace ----
 st.title("Moje školní aplikace: body na kružnici")
