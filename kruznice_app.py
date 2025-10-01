@@ -3,6 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tempfile
 from fpdf import FPDF
+import base64
+from io import BytesIO
+
+# -----------------------------
+# Base64 kód fontu DejaVuSans.ttf
+# Z důvodu velikosti sem dej svůj base64 kód
+# font_base64 = "TU1U...."
+font_base64 = "TU1U..."  # nahraď úplným base64 kódem fontu
+font_data = base64.b64decode(font_base64)
+font_file = BytesIO(font_data)
+# -----------------------------
 
 # ---- Nadpis aplikace ----
 st.title("Moje školní aplikace: body na kružnici")
